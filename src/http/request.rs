@@ -19,7 +19,7 @@ impl<'buf> TryFrom<&'buf [u8]> for Request<'buf> {
 
         let (method, request) = get_next_word(request).ok_or(ParseError::InvalidRequest)?;
         let (mut path, request) = get_next_word(request).ok_or(ParseError::InvalidRequest)?;
-        let (protocol, request) = get_next_word(request).ok_or(ParseError::InvalidRequest)?;
+        let (protocol, _) = get_next_word(request).ok_or(ParseError::InvalidRequest)?;
 
         if protocol != "HTTP/1.1" {
             return Err(ParseError::InvalidProtocol);
